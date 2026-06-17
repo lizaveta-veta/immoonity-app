@@ -15,6 +15,9 @@ with open('agg_model_v2.pkl', 'rb') as f:
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
+    for key in data:
+        if key != 'sex': # Пол оставляем текстом ('M' или 'F')
+            data[key] = float(data[key])
     results = []
 
     # 1. ЗЕМНАЯ МОДЕЛЬ
